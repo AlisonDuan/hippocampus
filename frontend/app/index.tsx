@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
-
+import { Flashcard } from './services/types';
 // REPLACE THIS with your computer's local IP address!
 const BASE_URL = "http://192.168.0.241:3000"; 
-
-interface Flashcard {
-  id: string;
-  front: string;
-  back: string;
-}
 
 export default function App() {
   const [cards, setCards] = useState<Flashcard[]>([]);
