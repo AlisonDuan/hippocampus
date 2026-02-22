@@ -24,7 +24,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="practice"
         options={{
           title: 'Practice',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="checklist" color={color} />,

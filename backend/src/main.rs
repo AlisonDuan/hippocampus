@@ -40,6 +40,9 @@ async fn get_cards() -> Json<Vec<Flashcard>> {
     ])
 }
 
+async fn add_cards() -> Json<String>{
+    
+}
 async fn sync_cards(Json(payload): Json<Vec<Flashcard>>) -> Json<String> {
     println!("Received {} cards for sync", payload.len());
     Json("Sync Successful".into())
