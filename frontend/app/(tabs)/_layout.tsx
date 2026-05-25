@@ -19,8 +19,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          title: 'Add Cards',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="plus.circle" color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="review"
+        options={{
           title: 'Review',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="list.bullet.clipboard" color={color} />,
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="rectangle.stack" color={color} />,
         }}
       />
       <Tabs.Screen

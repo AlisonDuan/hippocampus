@@ -90,7 +90,7 @@ export default function PracticeScreen() {
         <View style={styles.center}>
           <Text style={styles.title}>Practice</Text>
           <Text style={styles.noCards}>No cards due right now.</Text>
-          <Text style={styles.hint}>Add cards on the Review tab and come back.</Text>
+          <Text style={styles.hint}>Add cards on the Add Cards tab and come back.</Text>
         </View>
       </ParallaxScrollView>
     );
