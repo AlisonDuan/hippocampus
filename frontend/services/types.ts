@@ -20,4 +20,5 @@ export interface CardDoc extends SRSFields {
   type: 'card';
   front: string;
   back: string;
+  category?: string;
 }

@@ -8,7 +8,7 @@ const DB_NAME = 'hippocampus';
 // From a physical device, set EXPO_PUBLIC_SYNC_URL to your machine's LAN IP, e.g. http://192.168.0.241:5984/hippocampus
 const REMOTE_URL =
   (typeof process !== 'undefined' && process.env?.EXPO_PUBLIC_SYNC_URL) ||
-  'http://localhost:5984/hippocampus';
+  'http://admin:mysecretpassword1@localhost:5984/hippocampus';
 
 let localDb: PouchDB.Database<CardDoc> | null = null;
 
@@ -23,12 +23,13 @@ export function getRemoteDb(): PouchDB.Database<CardDoc> {
   return new PouchDB<CardDoc>(REMOTE_URL);
 }
 
-export function createCardDoc(front: string, back: string, id?: string): CardDoc {
+export function createCardDoc(front: string, back: string, id?: string, category?: string): CardDoc {
   return {
     _id: id || generateId(),
     type: 'card',
     front,
     back,
+    ...(category ? { category } : {}),
   };
 }
 
@@ -70,11 +71,22 @@ export async function syncWithRemote(): Promise<void> {
   await db.sync(remote, { live: false, retry: true });
 }
 
-export async function getDueCards(): Promise<CardDoc[]> {
+export async function getAllCategories(): Promise<string[]> {
+  const all = await getAllCards();
+  const cats = new Set<string>();
+  for (const card of all) {
+    if (card.category) cats.add(card.category);
+  }
+  return Array.from(cats).sort();
+}
+
+export async function getDueCards(category?: string): Promise<CardDoc[]> {
   const all = await getAllCards();
   const now = new Date().toISOString();
   return all.filter(
-    (doc) => doc.next_review == null || doc.next_review <= now
+    (doc) =>
+      (category == null || doc.category === category) &&
+      (doc.next_review == null || doc.next_review <= now)
   );
 }
 
