@@ -18,7 +18,7 @@ import {
   type CardDoc,
 } from '../../services/pouch';
 
-export default function Review() {
+export default function AddCards() {
   const [cards, setCards] = useState<CardDoc[]>([]);
   const [front, setFront] = useState('');
   const [back, setBack] = useState('');
